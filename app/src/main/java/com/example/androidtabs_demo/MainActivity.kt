@@ -3,9 +3,10 @@ package com.example.androidtabs_demo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import com.example.androidtabs_demo.ui.pager.PagerViewAdapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import kotlinx.android.synthetic.main.activity_main.*
+
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,7 +22,7 @@ class MainActivity : AppCompatActivity() {
             R.drawable.appalachian6
         )
 
-        val adapter = ViewPagerAdapter(images)
+        val adapter = PagerViewAdapter(images)
 
         viewPager.adapter = adapter
 
