@@ -9,7 +9,9 @@
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:tabMode="scrollable"
-        app:tabContentStart="56dp" />
+        app:tabPaddingStart="40dp"
+        app:tabPaddingEnd="40dp"
+        app:tabIndicatorFullWidth="false"
+        app:tabMode="scrollable" />
 
 </LinearLayout>

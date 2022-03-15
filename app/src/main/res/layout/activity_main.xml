@@ -14,7 +14,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="600dp">
+            android:layout_height="400dp">
 
             <TextView
                 android:layout_width="match_parent"
@@ -22,6 +22,9 @@
                 android:text="Other section">
             </TextView>
         </LinearLayout>
+
+        <include android:id="@+id/tabsContainer" layout="@layout/tabs_view" />
+        <include android:id="@+id/pagerContainer" layout="@layout/pager_view" />
 
     </LinearLayout>
 

@@ -3,46 +3,42 @@ package com.example.androidtabs_demo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.example.androidtabs_demo.databinding.ActivityMainBinding
 import com.example.androidtabs_demo.ui.pager.PagerViewAdapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import kotlinx.android.synthetic.main.pager_view.viewPager
+import kotlinx.android.synthetic.main.tabs_view.tabLayout
 
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding= ActivityMainBinding.inflate(layoutInflater)
 
-        val images = listOf(
-            R.drawable.appalachian1,
-            R.drawable.appalachian2,
-            R.drawable.appalachian3,
-            R.drawable.appalachian4,
-            R.drawable.appalachian5,
-            R.drawable.appalachian6
-        )
+        setContentView(binding.root)
+        setupViews()
 
-        val adapter = PagerViewAdapter(images)
+    }
 
-        viewPager.adapter = adapter
+    private fun setupViews() {
+        val tabLayout = binding.tabsContainer
+        val viewPager = binding.pagerContainer
+        val adapter = PagerViewAdapter(this, listOf(RandomFragment(), RandomFragment()), listOf("Tab 1", "Tab 2"))
+        viewPager.viewPager.adapter = adapter
 
-        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
-            tab.text = "Tab ${position + 1}"
+        TabLayoutMediator(tabLayout.tabLayout, viewPager.viewPager) { tab, position ->
+            tab.text = adapter.tabsList[position]
         }.attach()
-
-        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-                Toast.makeText(this@MainActivity, "Reselected ${tab?.text}", Toast.LENGTH_SHORT).show()
-            }
-
-            override fun onTabUnselected(tab: TabLayout.Tab?) {
-                Toast.makeText(this@MainActivity, "Unselected ${tab?.text}", Toast.LENGTH_SHORT).show()
-            }
-
-            override fun onTabReselected(tab: TabLayout.Tab?) {
-                Toast.makeText(this@MainActivity, "Selected ${tab?.text}", Toast.LENGTH_SHORT).show()
-            }
-
-        })
     }
 }
+
+
+
+class RandomFragment: Fragment() {}
